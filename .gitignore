@@ -1,0 +1,5 @@
+# the files that are auto generated should never be sent to github
+
+/node_modules
+/dist
+/.parcel-cache

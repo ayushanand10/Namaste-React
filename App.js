@@ -1,21 +1,7 @@
-// const heading = React.createElement("h1", {id:"heading", xyz:'abc'}, "Hello from nobody");     //("element", object - give attributes to the element, "innerHTML content")
-// // console.log(heading);   // heading is an object
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));      // select root to render all the react content
-
-// root.render(heading);
-
-
-
-/* 
-suppose we need to create this nested structure
-    <div id='parent'>
-        <div id='child'>
-            <h1>I m h1</h1>
-            <h2>I m h2</h2>
-        </div>
-    </div>
-*/
 
 const parent = React.createElement('div', {id: 'parent'},
     React.createElement('div', {id: 'child'},
