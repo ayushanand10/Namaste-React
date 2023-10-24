@@ -1,3 +1,27 @@
-#heading{
-    color: red;
+/* *{
+    border: 1px solid red;
+} */
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.container{
+    margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+}
+
+.cardContainer{
+    padding: 1% 2%;
+    width: fit-content;
+    background-color: bisque;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
