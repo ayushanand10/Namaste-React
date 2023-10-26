@@ -8,8 +8,12 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.container{
+.containerWrapper{
     margin-top: 5%;
+}
+
+.container{
+    margin-top: 2%;
     display: flex;
     flex-wrap: wrap;
     gap: 2vw;

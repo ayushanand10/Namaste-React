@@ -1,0 +1,52 @@
+export const data = [
+  {
+    id: "1",
+    name: "Ayush",
+    age: 23,
+  },
+  {
+    id: "2",
+    name: "Anand",
+    age: "20",
+  },
+  {
+    id: "3",
+    name: "Nilabh",
+    age: "13",
+  },
+  {
+    id: "4",
+    name: "Mishra",
+    age: "2",
+  },
+  {
+    id: "5",
+    name: "kartik",
+    age: "17",
+  },
+  {
+    id: "6",
+    name: "Srivastava",
+    age: "15",
+  },
+  {
+    id: "7",
+    name: "Praja",
+    age: "33",
+  },
+  {
+    id: "8",
+    name: "Kunal",
+    age: "24",
+  },
+  {
+    id: "9",
+    name: "Avadhesh",
+    age: "18",
+  },
+  {
+    id: "10",
+    name: "Shashank",
+    age: "23",
+  },
+]
