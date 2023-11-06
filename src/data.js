@@ -2,7 +2,7 @@ export const data = [
   {
     id: "1",
     name: "Ayush",
-    age: 23,
+    age: "23",
   },
   {
     id: "2",
@@ -46,6 +46,21 @@ export const data = [
   },
   {
     id: "10",
+    name: "Shashank",
+    age: "23",
+  },
+  {
+    id: "11",
+    name: "Shashank",
+    age: "23",
+  },
+  {
+    id: "12",
+    name: "Shashank",
+    age: "23",
+  },
+  {
+    id: "13",
     name: "Shashank",
     age: "23",
   },
