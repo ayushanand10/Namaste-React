@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Card"
 import ShimmerUi from "./ShimmerUi"
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const Component = () => {
   // State variable - super powerful variable
@@ -13,17 +14,23 @@ const Component = () => {
   }, [])
 
   const fetchData = async () => {
-    const data = await fetch("http://localhost:3000/data")
+    // const data = await fetch("http://localhost:3000/data")
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
 
+    
     const json = await data.json()
+    
+    const API_CONST = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
-    setRecord(json)
-    setFilteredRecord(json)
+    console.log(API_CONST);
+    
+    setRecord(API_CONST)
+    setFilteredRecord(API_CONST)
   }
 
   const [searchText, setSearchText] = useState('')
 
-  console.log('body rendered');
+  // console.log('body rendered');
 
   return record.length === 0 ? (
     <ShimmerUi />
@@ -44,10 +51,10 @@ const Component = () => {
           />
 
           <button
-            className="loginBtn"
+            className="actionBtn"
             onClick={() => {
               const filteredRecord = record.filter((res) => {
-                return res.name.toLowerCase().includes(searchText.toLowerCase())
+                return res.info.name.toLowerCase().includes(searchText.toLowerCase())
               })
               setFilteredRecord(filteredRecord);
             }}
@@ -58,23 +65,24 @@ const Component = () => {
         </div>
 
         <button
-          className='loginBtn'
+          className='actionBtn'
           onClick={() => {
             // Filter logic (age < 18)
-            const filteredList = record.filter((res) => res.age < 18)
+            const filteredList = record.filter((res) => res.info.avgRating > 4.5)
             setFilteredRecord(filteredList)
           }}
         >
-          Minor
+          Highest Rated ({">"} 4.5)
         </button>
       </div>
 
       <div className='container'>
-        {filteredRecord.map((student) => (
+        {filteredRecord.map((res) => (
+          <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
           <Card
-            key={student.id}
-            data={student}
-          />
+            data={res}
+            />
+          </Link>
         ))}
       </div>
     </div>
