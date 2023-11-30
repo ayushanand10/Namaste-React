@@ -3,9 +3,9 @@
 } */
 
 * {
-    /* padding: 0;
-    margin: 0; */
-    font-family: 'Arial Narrow', Arial, sans-serif;
+    padding: 1px;
+    margin: 1px;
+    font-family:'cursive', 'Arial Narrow', Arial, sans-serif;
 }
 
 a{
@@ -97,4 +97,9 @@ a{
 .search {
     display: flex;
     justify-content: center;
+}
+
+.userCard{
+    padding: 10px;
+    border: 1px solid black;
 }
