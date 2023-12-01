@@ -3,6 +3,7 @@ import Card from "./Card"
 import ShimmerUi from "./ShimmerUi"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import useOnlineStatus from "../utils/useOnlineStatus"
 
 const Component = () => {
   // State variable - super powerful variable
@@ -14,61 +15,68 @@ const Component = () => {
   }, [])
 
   const fetchData = async () => {
-    // const data = await fetch("http://localhost:3000/data")
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    )
 
-    
     const json = await data.json()
-    
-    const API_CONST = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
-    console.log(API_CONST);
-    
+    const API_CONST =
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+
     setRecord(API_CONST)
     setFilteredRecord(API_CONST)
   }
 
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState("")
 
-  // console.log('body rendered');
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return (
+      <h1>Looks like you are offline</h1>
+    )
+  }
 
   return record.length === 0 ? (
     <ShimmerUi />
   ) : (
     <div className='containerWrapper'>
-      <div className="filter">
-        <div className="search">
-
+      <div className='filter'>
+        <div className='search'>
           <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Search"
+            type='text'
+            name=''
+            id=''
+            placeholder='Search'
             value={searchText}
             onChange={(e) => {
-              setSearchText(e.target.value);
+              setSearchText(e.target.value)
             }}
           />
 
           <button
-            className="actionBtn"
+            className='actionBtn'
             onClick={() => {
               const filteredRecord = record.filter((res) => {
-                return res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
               })
-              setFilteredRecord(filteredRecord);
+              setFilteredRecord(filteredRecord)
             }}
           >
             Search
           </button>
-
         </div>
 
         <button
           className='actionBtn'
           onClick={() => {
             // Filter logic (age < 18)
-            const filteredList = record.filter((res) => res.info.avgRating > 4.5)
+            const filteredList = record.filter(
+              (res) => res.info.avgRating > 4.5
+            )
             setFilteredRecord(filteredList)
           }}
         >
@@ -78,10 +86,11 @@ const Component = () => {
 
       <div className='container'>
         {filteredRecord.map((res) => (
-          <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
-          <Card
-            data={res}
-            />
+          <Link
+            to={"/restaurant/" + res.info.id}
+            key={res.info.id}
+          >
+            <Card data={res} />
           </Link>
         ))}
       </div>

@@ -1,14 +1,19 @@
-import React from "react"
 import ReactDOM from "react-dom/client"
 
 import About from "./components/About"
-import Header from './components/Header'
+import Header from "./components/Header"
 import Component from "./components/component"
-import Error from './components/Error'
-import Contact from './components/Contact'
+import Error from "./components/Error"
+import Contact from "./components/Contact"
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
 import RestaurantMenu from "./components/RestaurantMenu"
+
+import React, { Suspense, lazy } from "react"
+
+// import Grocery from "./components/Grocery"
+
+const Grocery = lazy(() => import("./components/Grocery"))
 
 const Body = () => {
   return (
@@ -37,11 +42,19 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
+      {
         path: "/restaurant/:resId",
-        element: <RestaurantMenu />
-      }
+        element: <RestaurantMenu />,
+      },
     ],
-    errorElement: <Error />
+    errorElement: <Error />,
   },
 ])
 

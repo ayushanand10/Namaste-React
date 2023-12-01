@@ -5,12 +5,12 @@ const User = (props) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      console.log("useEffect time out")
+      // console.log("useEffect time out")
     }, 1000)
 
     return () => {
       clearInterval(timer)
-      console.log("Timer stopped")
+      // console.log("Timer stopped")
     }
   }, [])
 

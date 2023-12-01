@@ -5,14 +5,14 @@
 * {
     padding: 1px;
     margin: 1px;
-    font-family:'cursive', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'cursive', 'Arial Narrow', Arial, sans-serif;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
 
-    :hover{
+    :hover {
         text-decoration: underline;
     }
 }
@@ -66,10 +66,10 @@ a{
 
     >ul {
         display: flex;
-        gap: 15%;
         list-style: none;
         align-items: center;
-        width: 40%;
+        justify-content: center;
+        gap: 50px;
     }
 }
 
@@ -99,7 +99,7 @@ a{
     justify-content: center;
 }
 
-.userCard{
+.userCard {
     padding: 10px;
     border: 1px solid black;
 }

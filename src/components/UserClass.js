@@ -3,7 +3,7 @@ import DummyClass from "./DummyClass"
 
 class UserClass extends React.Component {
   constructor(props) {
-    console.log("Constructor Called");
+    // console.log("Constructor Called");
 
     super(props)
 
@@ -16,7 +16,7 @@ class UserClass extends React.Component {
   }
 
   async componentDidMount() {
-    console.log("Component Did Mount");
+    // console.log("Component Did Mount");
 
     const data = await fetch(" https://api.github.com/users/ayushanand10")
     const json = await data.json()
@@ -27,15 +27,15 @@ class UserClass extends React.Component {
   }
   
   componentDidUpdate() {
-    console.log("Component Did Update");
+    // console.log("Component Did Update");
   }
 
   componentWillUnmount() {
-    console.log("Component Will Unmount");
+    // console.log("Component Will Unmount");
   }
   
   render() {
-    console.log("Component Rendered");
+    // console.log("Component Rendered");
 
     const { name, location } = this.state.userInfo;
 
