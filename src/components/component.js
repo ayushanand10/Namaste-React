@@ -30,21 +30,20 @@ const Component = () => {
 
   const [searchText, setSearchText] = useState("")
 
-  const onlineStatus = useOnlineStatus();
+  const onlineStatus = useOnlineStatus()
 
   if (onlineStatus === false) {
-    return (
-      <h1>Looks like you are offline</h1>
-    )
+    return <h1>Looks like you are offline</h1>
   }
 
   return record.length === 0 ? (
     <ShimmerUi />
   ) : (
     <div className='containerWrapper'>
-      <div className='filter'>
-        <div className='search'>
+      <div className='flex gap-8 m-4 p-4'>
+        <div className='flex gap-4'>
           <input
+            className='border border-black rounded-lg px-2'
             type='text'
             name=''
             id=''
@@ -56,7 +55,7 @@ const Component = () => {
           />
 
           <button
-            className='actionBtn'
+            className='px-2 bg-gray-300 rounded-lg'
             onClick={() => {
               const filteredRecord = record.filter((res) => {
                 return res.info.name
@@ -71,7 +70,7 @@ const Component = () => {
         </div>
 
         <button
-          className='actionBtn'
+          className='px-2 bg-green-300 rounded-lg'
           onClick={() => {
             // Filter logic (age < 18)
             const filteredList = record.filter(
@@ -84,7 +83,7 @@ const Component = () => {
         </button>
       </div>
 
-      <div className='container'>
+      <div className='flex flex-wrap p-4'>
         {filteredRecord.map((res) => (
           <Link
             to={"/restaurant/" + res.info.id}
