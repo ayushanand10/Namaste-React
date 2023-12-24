@@ -9,18 +9,32 @@ import Contact from "./components/Contact"
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
 import RestaurantMenu from "./components/RestaurantMenu"
 
-import React, { Suspense, lazy } from "react"
-
-// import Grocery from "./components/Grocery"
+import React, { Suspense, lazy, useEffect, useState } from "react"
+import UserContext from "./utils/UserContext"
 
 const Grocery = lazy(() => import("./components/Grocery"))
 
 const Body = () => {
+  const [userName, setUserName] = useState()
+
+  // Authentication
+  useEffect(() => {
+    // Make API call and receive user data
+
+    // suppose this data came from the backend
+    const data = {
+      name: "Ayush Anand",
+    }
+    setUserName(data.name)
+  }, [])
+
   return (
-    <div className='body'>
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className='body'>
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   )
 }
 

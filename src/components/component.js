@@ -1,14 +1,16 @@
-import React from "react"
-import Card from "./Card"
+import React, { useContext } from "react"
+import Card, { withDiscountLable } from "./Card"
 import ShimmerUi from "./ShimmerUi"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus"
+import UserContext from "../utils/UserContext"
 
 const Component = () => {
-  // State variable - super powerful variable
   const [record, setRecord] = useState([])
   const [filteredRecord, setFilteredRecord] = useState([])
+
+  const CardWithDiscount = withDiscountLable(Card)
 
   useEffect(() => {
     fetchData()
@@ -22,7 +24,9 @@ const Component = () => {
     const json = await data.json()
 
     const API_CONST =
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+
+    console.log(API_CONST)
 
     setRecord(API_CONST)
     setFilteredRecord(API_CONST)
@@ -36,7 +40,9 @@ const Component = () => {
     return <h1>Looks like you are offline</h1>
   }
 
-  return record.length === 0 ? (
+  const { loggedInUser, setUserName } = useContext(UserContext)
+
+  return !record || record.length === 0 ? (
     <ShimmerUi />
   ) : (
     <div className='containerWrapper'>
@@ -68,7 +74,6 @@ const Component = () => {
             Search
           </button>
         </div>
-
         <button
           className='px-2 bg-green-300 rounded-lg'
           onClick={() => {
@@ -81,15 +86,29 @@ const Component = () => {
         >
           Highest Rated ({">"} 4.5)
         </button>
+        User Name:
+        <input
+          type='text'
+          value={loggedInUser}
+          className='border border-black rounded-lg px-2 py-1'
+          onChange={(e) => {
+            setUserName(e.target.value)
+          }}
+        />
       </div>
 
-      <div className='flex flex-wrap p-4'>
+      <div className='flex flex-wrap p-2 m-2'>
         {filteredRecord.map((res) => (
           <Link
             to={"/restaurant/" + res.info.id}
             key={res.info.id}
           >
-            <Card data={res} />
+            {/* If restaurant offers any discount then show the discount on the card */}
+            {res.info.aggregatedDiscountInfoV2 != null ? (
+              <Card data={res} />
+            ) : (
+              <CardWithDiscount data={res} />
+            )}
           </Link>
         ))}
       </div>

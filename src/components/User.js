@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import UserContext from "../utils/UserContext"
 
-const User = (props) => {
+function User(props) {
   const { name, location } = props
 
   useEffect(() => {
@@ -19,6 +20,11 @@ const User = (props) => {
       <h2>Name: {name}</h2>
       <h3>Location: {location}</h3>
       <h4>contact: ayushanand1010@gmail.com</h4>
+      <div className=''>
+        <UserContext.Consumer>
+          {(data) => <h1>{data.loggedInUser}</h1>}
+        </UserContext.Consumer>
+      </div>
     </div>
   )
 }
