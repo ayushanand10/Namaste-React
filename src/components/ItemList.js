@@ -1,6 +1,14 @@
 import { IMG_SRC } from "../utils/constants"
+import {addItem} from '../utils/cartSlice'
+import { useDispatch } from "react-redux"
 
 const ItemList = ({ items }) => {
+  
+  const dispatch = useDispatch()
+
+  const handleAddItem = (item) => {
+      dispatch(addItem(item))
+  }
 
   return (
     <div className='flex flex-col gap-2'>
@@ -14,7 +22,10 @@ const ItemList = ({ items }) => {
             </div>
           </div>
           <div className='w-2/12'>
-            <button className='px-4 bg-black text-white text-sm absolute rounded-lg'>
+            <button
+              className='px-4 bg-black text-white text-sm absolute rounded-lg'
+              onClick={() => handleAddItem(item)}
+            >
               Add
             </button>
             <img

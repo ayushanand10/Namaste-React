@@ -12,6 +12,10 @@ import RestaurantMenu from "./components/RestaurantMenu"
 import React, { Suspense, lazy, useEffect, useState } from "react"
 import UserContext from "./utils/UserContext"
 
+import { Provider } from "react-redux"
+import appStore from "./utils/appStore"
+import Cart from "./components/Cart"
+
 const Grocery = lazy(() => import("./components/Grocery"))
 
 const Body = () => {
@@ -29,12 +33,14 @@ const Body = () => {
   }, [])
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className='body'>
-        <Header />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className='body'>
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   )
 }
 
@@ -54,6 +60,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/grocery",
