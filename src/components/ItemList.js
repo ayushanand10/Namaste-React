@@ -17,7 +17,7 @@ const ItemList = ({ items }) => {
           <div className='w-10/12'>
             <div className='font-semibold'>{item.card.info.name}</div>
             <div className='text-sm'>₹{item.card.info.price / 100}</div>
-            <div className='text-xs font-extralight'>
+            <div className='text-sm font-extralight'>
               {item.card.info.description && item.card.info.description}
             </div>
           </div>
