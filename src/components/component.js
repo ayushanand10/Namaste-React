@@ -26,7 +26,7 @@ const Component = () => {
     const API_CONST =
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 
-    // console.log(API_CONST)
+    console.log(API_CONST)
 
     setRecord(API_CONST)
     setFilteredRecord(API_CONST)
